@@ -4,14 +4,9 @@ export class Seat extends Component {
     constructor(props) {
         super(props);
       //  this.getPassengerDetails=this.getPassengerDetails.bind(this);
-      this.updateName=this.updateName.bind(this);
-      this.updateAge=this.updateAge.bind(this);
-      this.updateGender=this.updateGender.bind(this);
-      this.updatePhone=this.updatePhone.bind(this);
+      this.updateStatus=this.updateStatus.bind(this);
       this.updateTicket=this.updateTicket.bind(this);
-      this.updateTicketDetails=this.updateTicketDetails.bind(this);
-      
-        this.state = {
+      this.state = {
             currentTicket: {
                 ticket_id:this.props.match.params.id,
                 seat_no:null,
@@ -26,13 +21,7 @@ export class Seat extends Component {
                 } 
               
               },
-              currentPass:{
-                name:"",
-                gender:"",
-                age:null,
-                phone:"",
-                email:""
-              },
+           
             message:"",
           isLoaded: false
         }
@@ -51,110 +40,19 @@ export class Seat extends Component {
         
 
       }
-    updateName(e){
-        const nam=e.target.value;
-        console.log(nam);
-        this.setState(prevState => ({
-            ...prevState,
-            currentTicket: {
-                ...prevState.currentTicket,
-                passenger:  {
-                       ...prevState.currentTicket.passenger,
-                       name: nam
-                    }
-                }
-           
-        }))
-    }
-    updateGender(e){
-        const g=e.target.value;
-        console.log(g);
-        this.setState(prevState => ({
-            ...prevState,
-            currentTicket: {
-                ...prevState.currentTicket,
-                passenger:  {
-                       ...prevState.currentTicket.passenger,
-                       gender: g
-                    }
-                }
-           
-        }))
-    }
-    updateAge(e){
-        const ag=e.target.value;
-        console.log(ag);
-        this.setState(prevState => ({
-            ...prevState,
-            currentTicket: {
-                ...prevState.currentTicket,
-                passenger:  {
-                       ...prevState.currentTicket.passenger,
-                       age: ag
-                    }
-                }
-           
-        }))
-    }
-    updatePhone(e){
-        const ph=e.target.value;
-        console.log(ph);
-        this.setState(prevState => ({
-            ...prevState,
-            currentTicket: {
-                ...prevState.currentTicket,
-                passenger:  {
-                       ...prevState.currentTicket.passenger,
-                       phone: ph
-                    }
-                }
-           
-        }))
-    }
-    updateMail(e){
-        const mail=e.target.value;
-        console.log(mail);
-        this.setState(prevState => ({
-            ...prevState,
-            currentTicket: {
-                ...prevState.currentTicket,
-                passenger:  {
-                       ...prevState.currentTicket.passenger,
-                       email:mail
-                    }
-                }
-           
-        }))
-    }
-      updateTicketDetails=()=>{
-           /*  let ticktet={
-                    ticket_id: this.state.currentTicket.ticket_id,
-                    is_available:this.state.currentTicket.is_available,
-                    seat_no:this.state.seat_no,
-                    passenger:{
-                        name:this.state.currentTicket.passenger.name,
-                        gender:this.state.currentTicket.passenger.gender,
-                        age:this.state.currentTicket.passenger.age,
-                        phone:this.state.currentTicket.passenger.phone,
-                        email:  this.state.currentTicket.passenger.email,
-                       
-                       
-                        
-                    }
-                }
-                   */ 
-      
-  
+    updateStatus=(status)=>{
+        this.setState(prevState=>({
+            ...prevState.currentTicket,
+                is_available:status
+            
+    }))
 
-    
-             
-                  
-      }
+    }
       updateTicket=(e)=>{
       
         const ticket={
-            seat_no:e.target.value,
-         //   is_available:document.getElementById('avail'),
+            seat_no:this.state.seat_no,
+       is_available:this.state.is_available,
            passenger:{ name:document.getElementById('name'), 
             gender:document.getElementById('gender'),
             age:document.getElementById('age'),
@@ -172,8 +70,8 @@ export class Seat extends Component {
         
                        
             method: 'PUT',
-            mode:'cors',
-            headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*',
+          // status:"OK",
+            headers: {'Content-Type': 'application/json'
         },
             body: JSON.stringify(this.state.currentTicket)
           }).then(res => res.json()).then(r=>{
