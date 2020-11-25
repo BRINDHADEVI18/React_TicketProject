@@ -131,6 +131,8 @@ class SeatDetails extends Component {
         </div>
         <div >
             <br></br>
+             <br></br>
+            <br></br>
             <button
             className="m-3 btn btn-sm btn-danger"
             onClick={this.resetAllTickets}
