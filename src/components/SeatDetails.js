@@ -72,7 +72,7 @@ class SeatDetails extends Component {
  //   const {open,close}=this.props;
     return (
             <div style={{display: "flex"}} className="list row">
-       <div className="col-md-6">
+       <div className="col-md-8">
                  <div style={styles.wrapper}>
           <div className="steer" style={styles.steer}>
             <img style={styles.img} src={steer} alt="Steering"/>
